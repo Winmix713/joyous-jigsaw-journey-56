@@ -2,6 +2,7 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import MainLayout from '@/components/layout/MainLayout';
 import ErrorBoundary from '@/components/ErrorBoundary';
+import BetSlip from '@/components/betting/BetSlip';
 
 // Pages
 import Index from '@/pages/Index';
@@ -26,6 +27,7 @@ function App() {
             <Route path="*" element={<NotFound />} />
           </Routes>
         </ErrorBoundary>
+        <BetSlip />
       </MainLayout>
     </Router>
   );

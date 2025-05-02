@@ -14,7 +14,7 @@ export const createUISlice: StateCreator<
   [],
   [],
   UISlice
-> = (set) => ({
+> = (set, get, api) => ({
   isDarkMode: true,
   
   toggleDarkMode: () =>

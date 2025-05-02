@@ -9,9 +9,9 @@ import { createLeaguesSlice, LeaguesSlice } from './slices/leagues-slice';
 export type AppState = UISlice & UserSlice & BettingSlice & LeaguesSlice;
 
 // Create the combined store using Zustand's create function
-export const useAppStore = create<AppState>((set, get) => ({
-  ...createUISlice(set, get),
-  ...createUserSlice(set, get),
-  ...createBettingSlice(set, get),
-  ...createLeaguesSlice(set, get),
+export const useAppStore = create<AppState>()((set, get, api) => ({
+  ...createUISlice(set, get, api),
+  ...createUserSlice(set, get, api),
+  ...createBettingSlice(set, get, api),
+  ...createLeaguesSlice(set, get, api),
 }));

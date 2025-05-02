@@ -29,7 +29,7 @@ export const createBettingSlice: StateCreator<
   [],
   [],
   BettingSlice
-> = (set, get) => ({
+> = (set, get, api) => ({
   tips: mockTips,
   games: mockGames,
   currentBet: {
