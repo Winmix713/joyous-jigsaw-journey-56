@@ -32,6 +32,7 @@
     --chart-5: 135 59% 49%;
   }
  
+  /* In Once UI 2.0, we always use dark mode, so keep consistent values */
   .dark {
     --background: 220 14% 12%;
     --foreground: 0 0% 98%;
@@ -94,5 +95,22 @@
 
   .once-card {
     @apply bg-card border border-white/5 rounded-lg shadow-md;
+  }
+  
+  /* Add new utility classes for Once UI 2.0 */
+  .once-input {
+    @apply bg-muted border border-white/10 rounded-md px-3 py-2 text-sm focus:border-primary focus:ring-1 focus:ring-primary/30;
+  }
+  
+  .once-shadow {
+    @apply shadow-lg shadow-black/20;
+  }
+
+  .once-transition {
+    @apply transition-all duration-300 ease-in-out;
+  }
+
+  .once-hover-effect {
+    @apply hover:-translate-y-0.5 hover:shadow-lg hover:shadow-primary/10 transition-all duration-300;
   }
 }

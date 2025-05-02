@@ -19,7 +19,7 @@ const Layout = ({ children }: LayoutProps) => {
   
   return (
     <ToastProvider>
-      <div className="min-h-screen flex flex-col bg-background">
+      <div className="min-h-screen flex flex-col bg-background dark">
         <div className="fixed inset-0 z-[-1] bg-gradient-to-bl from-background to-background/95">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(155,135,245,0.08),transparent_40%),radial-gradient(circle_at_bottom_left,rgba(126,105,171,0.08),transparent_40%)]"></div>
         </div>

@@ -27,18 +27,20 @@ export function MainNavigation({ items, isActive, className }: MainNavigationPro
       <NavigationMenuList>
         {items.map((item) => (
           <NavigationMenuItem key={item.path}>
-            <Link to={item.path}>
-              <NavigationMenuLink 
-                className={cn(
-                  navigationMenuTriggerStyle(), 
-                  isActive(item.path) && "bg-primary text-primary-foreground",
-                  "hover:bg-muted"
-                )}
-              >
+            {/* Fix: Replace Link wrapping NavigationMenuLink with direct styling */}
+            <NavigationMenuLink 
+              asChild
+              className={cn(
+                navigationMenuTriggerStyle(), 
+                isActive(item.path) && "bg-primary text-primary-foreground",
+                "hover:bg-muted"
+              )}
+            >
+              <Link to={item.path}>
                 {item.icon}
                 {item.title}
-              </NavigationMenuLink>
-            </Link>
+              </Link>
+            </NavigationMenuLink>
           </NavigationMenuItem>
         ))}
       </NavigationMenuList>
