@@ -19,16 +19,16 @@ export default function MainLayout({ children }: MainLayoutProps) {
     // Set the page title
     document.title = "WinMix.hu - Premier Betting Platform";
     
-    // Toggle dark theme using DOM manipulation
-    document.documentElement.classList.toggle('dark', isDarkMode);
-  }, [isDarkMode]);
+    // Toggle dark theme using DOM manipulation - force dark mode in Once UI 2.0
+    document.documentElement.classList.add('dark');
+  }, []);
   
   // Prepare background gradient styles for Once UI 2.0 Dark
   const backgroundGradient = 
     "radial-gradient(circle at top right, rgba(155, 135, 245, 0.08), transparent 40%), radial-gradient(circle at bottom left, rgba(126, 105, 171, 0.08), transparent 40%)";
 
   return (
-    <div className={cn("min-h-screen flex flex-col", isDarkMode ? "dark" : "")}>
+    <div className="min-h-screen flex flex-col bg-background dark">
       {/* Decorative background */}
       <div 
         className="fixed inset-0 bg-background z-[-1]"
