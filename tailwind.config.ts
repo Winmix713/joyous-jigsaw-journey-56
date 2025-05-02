@@ -66,7 +66,9 @@ export default {
 					'dark': '#1A1F2C', // Dark background
 					'darker': '#12151F', // Even darker background
 					'gray': '#403E43', // Charcoal gray
-					'gray-light': '#8E9196' // Lighter gray
+					'gray-light': '#8E9196', // Lighter gray
+					'card-overlay': 'rgba(0, 0, 0, 0.7)', // Dark overlay for cards
+					'card-bg': '#0C0C0F', // Very dark background for cards
 				}
 			},
 			borderRadius: {
