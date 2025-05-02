@@ -15,7 +15,7 @@ export const createUISlice: StateCreator<
   [],
   UISlice
 > = (set, get, api) => ({
-  isDarkMode: true,
+  isDarkMode: true, // Always default to dark mode for Once UI 2.0
   
   toggleDarkMode: () =>
     set((state) => ({

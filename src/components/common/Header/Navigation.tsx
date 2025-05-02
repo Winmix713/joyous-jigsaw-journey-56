@@ -31,7 +31,8 @@ export function MainNavigation({ items, isActive, className }: MainNavigationPro
               <NavigationMenuLink 
                 className={cn(
                   navigationMenuTriggerStyle(), 
-                  isActive(item.path) && "bg-accent text-accent-foreground"
+                  isActive(item.path) && "bg-primary text-primary-foreground",
+                  "hover:bg-muted"
                 )}
               >
                 {item.icon}

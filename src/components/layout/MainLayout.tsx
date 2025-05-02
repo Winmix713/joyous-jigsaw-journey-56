@@ -2,7 +2,7 @@
 import { useEffect } from 'react';
 import { useAppStore } from '@/lib/store';
 import Header from '@/components/common/Header';
-import BetSlip from '@/components/BetSlip';
+import BetSlip from '@/components/betting/BetSlip';
 import FooterSection from '@/components/FooterSection';
 import { Toaster } from '@/components/ui/toaster';
 import { cn } from '@/lib/utils';
@@ -23,16 +23,15 @@ export default function MainLayout({ children }: MainLayoutProps) {
     document.documentElement.classList.toggle('dark', isDarkMode);
   }, [isDarkMode]);
   
-  // Prepare background gradient styles
-  const backgroundGradient = isDarkMode 
-    ? "radial-gradient(circle at top right, rgba(155, 135, 245, 0.08), transparent 40%), radial-gradient(circle at bottom left, rgba(14, 165, 233, 0.08), transparent 40%)"
-    : "radial-gradient(circle at top right, rgba(155, 135, 245, 0.15), transparent 40%), radial-gradient(circle at bottom left, rgba(14, 165, 233, 0.15), transparent 40%)";
+  // Prepare background gradient styles for Once UI 2.0 Dark
+  const backgroundGradient = 
+    "radial-gradient(circle at top right, rgba(155, 135, 245, 0.08), transparent 40%), radial-gradient(circle at bottom left, rgba(126, 105, 171, 0.08), transparent 40%)";
 
   return (
     <div className={cn("min-h-screen flex flex-col", isDarkMode ? "dark" : "")}>
       {/* Decorative background */}
       <div 
-        className="fixed inset-0 bg-gradient-to-br from-background via-background to-background/90 z-[-1]"
+        className="fixed inset-0 bg-background z-[-1]"
         style={{ backgroundImage: backgroundGradient }}
       />
       

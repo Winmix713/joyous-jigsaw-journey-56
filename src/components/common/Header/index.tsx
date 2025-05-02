@@ -29,7 +29,7 @@ export function Header() {
   const isActive = (path: string) => location.pathname === path;
 
   return (
-    <header className="sticky top-0 z-50 w-full bg-background/60 backdrop-blur-lg border-b">
+    <header className="sticky top-0 z-50 w-full bg-background/60 backdrop-blur-lg border-b border-white/5">
       <div className="container flex h-16 items-center justify-between">
         <div className="flex items-center gap-6">
           <Link to="/" className="flex items-center gap-2">
@@ -50,7 +50,7 @@ export function Header() {
             variant="outline" 
             size="icon" 
             onClick={toggleDarkMode}
-            className="hidden sm:flex"
+            className="hidden sm:flex bg-muted/50 border-white/10 hover:bg-muted"
           >
             {isDarkMode ? (
               <span className="h-[1.2rem] w-[1.2rem]">🌙</span>
@@ -79,7 +79,7 @@ export function Header() {
       
       {/* Mobile Navigation */}
       {isMobileMenuOpen && (
-        <div className="md:hidden border-t p-4">
+        <div className="md:hidden border-t border-white/5 p-4 bg-background/95 backdrop-blur-md">
           <nav className="flex flex-col space-y-2">
             {mainNavItems.map((item) => (
               <Link 
@@ -88,7 +88,7 @@ export function Header() {
                 className={cn(
                   "flex items-center px-2 py-1.5 text-sm font-medium rounded-md",
                   isActive(item.path) 
-                    ? "bg-accent text-accent-foreground" 
+                    ? "bg-primary text-primary-foreground" 
                     : "text-muted-foreground hover:text-foreground hover:bg-muted"
                 )}
                 onClick={() => setIsMobileMenuOpen(false)}

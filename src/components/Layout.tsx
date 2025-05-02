@@ -1,3 +1,4 @@
+
 import { useEffect } from "react";
 import { useAppStore } from "@/lib/store";
 import Header from "./Header";
@@ -13,14 +14,15 @@ const Layout = ({ children }: LayoutProps) => {
   
   useEffect(() => {
     // Set initial theme based on store
-    if (!isDarkMode) {
-      document.documentElement.classList.add("light");
-    }
-  }, []);
+    document.documentElement.classList.toggle('dark', isDarkMode);
+  }, [isDarkMode]);
   
   return (
     <ToastProvider>
-      <div className="min-h-screen flex flex-col bg-gradient-to-bl from-background to-zinc-900/80">
+      <div className="min-h-screen flex flex-col bg-background">
+        <div className="fixed inset-0 z-[-1] bg-gradient-to-bl from-background to-background/95">
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(155,135,245,0.08),transparent_40%),radial-gradient(circle_at_bottom_left,rgba(126,105,171,0.08),transparent_40%)]"></div>
+        </div>
         <Header />
         <div className="pt-20">{children}</div>
         <BetSlip />

@@ -43,7 +43,7 @@ export default function LeagueTable() {
 
   const getBadgeVariant = (status: LeagueData['status']) => {
     switch(status) {
-      case 'active': return 'success';
+      case 'active': return 'default';
       case 'completed': return 'secondary';
       case 'upcoming': return 'outline';
       default: return 'default';
@@ -51,7 +51,7 @@ export default function LeagueTable() {
   };
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 animate-fade-in">
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <h1 className="text-3xl font-bold tracking-tight premier-gradient-text">Soccer Championships</h1>
         <Button onClick={() => setIsNewLeagueModalOpen(true)} className="premier-button">
@@ -61,7 +61,7 @@ export default function LeagueTable() {
       </div>
       
       <Card className="glass-effect">
-        <CardHeader className="pb-2">
+        <CardHeader className="pb-2 border-b border-white/5">
           <CardTitle className="flex items-center justify-between">
             <span>Leagues</span>
             <div className="relative w-full max-w-sm">
@@ -70,12 +70,12 @@ export default function LeagueTable() {
                 placeholder="Search leagues..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="pl-9 bg-white/10"
+                className="pl-9 bg-muted/30 border-white/10"
               />
             </div>
           </CardTitle>
         </CardHeader>
-        <CardContent>
+        <CardContent className="pt-4">
           {leagues.length === 0 ? (
             <div className="text-center py-8">
               <Trophy className="h-12 w-12 mx-auto text-muted-foreground opacity-20 mb-2" />
@@ -83,7 +83,7 @@ export default function LeagueTable() {
               <Button 
                 onClick={() => setIsNewLeagueModalOpen(true)} 
                 variant="outline" 
-                className="mt-4"
+                className="mt-4 border-white/10 hover:bg-muted"
               >
                 Create your first league
               </Button>
@@ -92,20 +92,20 @@ export default function LeagueTable() {
             <div className="overflow-x-auto">
               <Table>
                 <TableHeader>
-                  <TableRow>
-                    <TableHead>Name</TableHead>
-                    <TableHead>Season</TableHead>
-                    <TableHead>Teams</TableHead>
-                    <TableHead>Status</TableHead>
-                    <TableHead>Last Updated</TableHead>
-                    <TableHead>Actions</TableHead>
+                  <TableRow className="border-white/5 hover:bg-transparent">
+                    <TableHead className="text-muted-foreground">Name</TableHead>
+                    <TableHead className="text-muted-foreground">Season</TableHead>
+                    <TableHead className="text-muted-foreground">Teams</TableHead>
+                    <TableHead className="text-muted-foreground">Status</TableHead>
+                    <TableHead className="text-muted-foreground">Last Updated</TableHead>
+                    <TableHead className="text-muted-foreground">Actions</TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
                   {filteredLeagues.map((league) => (
                     <TableRow 
                       key={league.id} 
-                      className="cursor-pointer hover:bg-white/5"
+                      className="cursor-pointer hover:bg-white/5 border-white/5"
                       onClick={() => handleViewLeague(league.id)}
                     >
                       <TableCell className="font-medium">{league.name}</TableCell>
@@ -126,6 +126,7 @@ export default function LeagueTable() {
                               e.stopPropagation();
                               handleViewLeague(league.id);
                             }}
+                            className="hover:bg-muted"
                           >
                             <Eye className="h-4 w-4" />
                           </Button>
@@ -137,13 +138,14 @@ export default function LeagueTable() {
                               setCurrentLeague(league.id);
                               navigate(`/leagues/${league.id}/edit`);
                             }}
+                            className="hover:bg-muted"
                           >
                             <Edit className="h-4 w-4" />
                           </Button>
                           <Button 
                             size="icon" 
                             variant="ghost" 
-                            className="text-destructive hover:text-destructive" 
+                            className="text-destructive hover:text-destructive hover:bg-muted" 
                             onClick={(e) => handleDeleteLeague(e, league.id)}
                           >
                             <Trash2 className="h-4 w-4" />

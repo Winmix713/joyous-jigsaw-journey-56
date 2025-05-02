@@ -17,17 +17,17 @@ const CategoryButton = ({ label, icon, active = false, count, onClick }: Categor
       className={cn(
         "flex items-center gap-2 py-2 px-4 rounded-md transition-colors",
         active 
-          ? "bg-gaming-blue text-white" 
-          : "hover:bg-gaming-gray text-gray-300"
+          ? "bg-primary text-primary-foreground" 
+          : "hover:bg-muted text-muted-foreground"
       )}
       onClick={onClick}
     >
-      <span className={active ? "text-white" : "text-gaming-blue"}>{icon}</span>
+      <span className={active ? "text-primary-foreground" : "text-primary"}>{icon}</span>
       <span>{label}</span>
       {count !== undefined && (
         <span className={cn(
           "text-xs py-0.5 px-2 rounded-full ml-1",
-          active ? "bg-white/20" : "bg-gaming-gray"
+          active ? "bg-white/20" : "bg-muted"
         )}>
           {count}
         </span>

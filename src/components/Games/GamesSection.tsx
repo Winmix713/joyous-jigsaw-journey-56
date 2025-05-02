@@ -21,13 +21,13 @@ const GamesSection = () => {
   return (
     <section className="py-6">
       <div className="mb-6 flex justify-between items-center">
-        <h2 className="text-2xl font-bold">Games</h2>
+        <h2 className="text-2xl font-bold premier-gradient-text">Games</h2>
         <div className="flex gap-2">
-          <div className="text-xs bg-gaming-blue text-white px-2 py-1 rounded-md flex items-center gap-1">
+          <div className="text-xs bg-primary text-primary-foreground px-2 py-1 rounded-md flex items-center gap-1">
             <span className="h-2 w-2 rounded-full bg-white"></span>
             {liveGamesCount} Live
           </div>
-          <div className="text-xs bg-gaming-gray text-white px-2 py-1 rounded-md">
+          <div className="text-xs bg-muted text-muted-foreground px-2 py-1 rounded-md">
             {upcomingGamesCount} Upcoming
           </div>
         </div>

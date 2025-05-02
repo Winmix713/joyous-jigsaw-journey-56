@@ -27,11 +27,11 @@ const GamesList = ({ category = "all" }: GamesListProps) => {
 
   if (filteredGames.length === 0) {
     return (
-      <div className="bg-gaming-dark rounded-lg p-8 flex flex-col items-center justify-center min-h-[300px]">
-        <div className="w-16 h-16 bg-gaming-gray rounded-full flex items-center justify-center mb-4">
-          <Info className="w-8 h-8 text-gray-400" />
+      <div className="once-card flex flex-col items-center justify-center min-h-[300px] p-8">
+        <div className="w-16 h-16 bg-muted rounded-full flex items-center justify-center mb-4">
+          <Info className="w-8 h-8 text-muted-foreground" />
         </div>
-        <p className="text-xl text-gray-400">No games found in this category</p>
+        <p className="text-xl text-muted-foreground">No games found in this category</p>
       </div>
     );
   }

@@ -29,11 +29,11 @@ export function UserMenu({ userStats, toggleDarkMode, isDarkMode }: UserMenuProp
             )}
           </Button>
         </DropdownMenuTrigger>
-        <DropdownMenuContent align="end" className="w-[300px]">
+        <DropdownMenuContent align="end" className="w-[300px] bg-card border-white/5">
           <div className="p-2 text-sm">
             {userStats.notifications.length > 0 ? (
               userStats.notifications.map((notification) => (
-                <DropdownMenuItem key={notification.id} className={cn(!notification.read && "font-medium")}>
+                <DropdownMenuItem key={notification.id} className={cn(!notification.read && "font-medium", "hover:bg-muted")}>
                   <div>
                     <p>{notification.title}</p>
                     <p className="text-xs text-muted-foreground">{notification.message}</p>
@@ -50,14 +50,14 @@ export function UserMenu({ userStats, toggleDarkMode, isDarkMode }: UserMenuProp
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Button variant="ghost" className="relative h-8 w-8 rounded-full">
-            <Avatar className="h-8 w-8 border">
+            <Avatar className="h-8 w-8 border border-white/10">
               <AvatarFallback className="text-sm bg-primary text-primary-foreground">
                 {userStats.username.substring(0, 2).toUpperCase()}
               </AvatarFallback>
             </Avatar>
           </Button>
         </DropdownMenuTrigger>
-        <DropdownMenuContent align="end">
+        <DropdownMenuContent align="end" className="bg-card border-white/5">
           <div className="flex items-center justify-start gap-2 p-2">
             <Avatar className="h-8 w-8">
               <AvatarFallback className="text-sm bg-primary text-primary-foreground">
@@ -71,16 +71,16 @@ export function UserMenu({ userStats, toggleDarkMode, isDarkMode }: UserMenuProp
               </p>
             </div>
           </div>
-          <DropdownMenuItem>
+          <DropdownMenuItem className="hover:bg-muted">
             Profile
           </DropdownMenuItem>
-          <DropdownMenuItem onClick={toggleDarkMode} className="md:hidden">
+          <DropdownMenuItem onClick={toggleDarkMode} className="md:hidden hover:bg-muted">
             {isDarkMode ? "Light Mode" : "Dark Mode"}
           </DropdownMenuItem>
-          <DropdownMenuItem>
+          <DropdownMenuItem className="hover:bg-muted">
             Settings
           </DropdownMenuItem>
-          <DropdownMenuItem>
+          <DropdownMenuItem className="hover:bg-muted">
             Logout
           </DropdownMenuItem>
         </DropdownMenuContent>

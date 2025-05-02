@@ -5,56 +5,56 @@
  
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
-    --primary: 260 91% 75%;
-    --primary-foreground: 210 40% 98%;
-    --secondary: 199 89% 48%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-    --accent: 263 67% 66%;
-    --accent-foreground: 222.2 47.4% 11.2%;
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
+    --background: 222 16% 15%;
+    --foreground: 0 0% 98%;
+    --card: 220 14% 12%;
+    --card-foreground: 0 0% 98%;
+    --popover: 220 14% 12%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 260 91% 75%; /* Once UI primary purple */
+    --primary-foreground: 0 0% 98%;
+    --secondary: 259 31% 49%; /* Darker purple */
+    --secondary-foreground: 0 0% 98%;
+    --muted: 220 14% 22%;
+    --muted-foreground: 220 14% 70%;
+    --accent: 255 29% 33%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 220 14% 22%;
+    --input: 220 14% 22%;
     --ring: 260 91% 75%;
     --radius: 0.75rem;
     --chart-1: 260 91% 75%;
-    --chart-2: 199 89% 48%;
-    --chart-3: 263 67% 66%;
+    --chart-2: 259 31% 49%;
+    --chart-3: 255 29% 33%;
     --chart-4: 332 80% 60%;
     --chart-5: 135 59% 49%;
   }
  
   .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
-    --primary: 260 91% 75%;
-    --primary-foreground: 222.2 47.4% 11.2%;
-    --secondary: 199 89% 48%;
-    --secondary-foreground: 210 40% 98%;
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-    --accent: 263 67% 66%;
-    --accent-foreground: 210 40% 98%;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
+    --background: 220 14% 12%;
+    --foreground: 0 0% 98%;
+    --card: 220 16% 15%;
+    --card-foreground: 0 0% 98%;
+    --popover: 220 14% 12%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 260 91% 75%; /* Once UI primary purple */
+    --primary-foreground: 220 14% 12%;
+    --secondary: 259 31% 49%; /* Darker purple */
+    --secondary-foreground: 0 0% 98%;
+    --muted: 220 14% 22%;
+    --muted-foreground: 220 14% 70%;
+    --accent: 255 29% 33%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 220 14% 22%;
+    --input: 220 14% 22%;
     --ring: 260 91% 75%;
     --chart-1: 260 91% 75%;
-    --chart-2: 199 89% 48%;
-    --chart-3: 263 67% 66%;
+    --chart-2: 259 31% 49%;
+    --chart-3: 255 29% 33%;
     --chart-4: 332 80% 60%;
     --chart-5: 135 59% 49%;
   }
@@ -69,15 +69,15 @@
   }
 
   .glass-effect {
-    @apply backdrop-blur-md bg-white/10 border border-white/20 rounded-xl shadow-xl;
+    @apply backdrop-blur-md bg-white/5 border border-white/10 rounded-xl shadow-lg;
   }
 
   .premier-card {
-    @apply bg-gradient-to-br from-primary/20 to-secondary/10 backdrop-blur-sm border border-white/10 rounded-xl shadow-lg;
+    @apply bg-gradient-to-br from-primary/20 to-secondary/10 backdrop-blur-sm border border-white/5 rounded-xl shadow-md;
   }
 
   .premier-card-header {
-    @apply bg-black text-white font-bold p-4 rounded-t-xl;
+    @apply bg-background/90 text-foreground font-bold p-4 rounded-t-xl border-b border-white/5;
   }
 
   .premier-gradient-text {
@@ -85,6 +85,14 @@
   }
 
   .premier-button {
-    @apply bg-gradient-to-r from-primary to-secondary text-white font-bold py-2 px-4 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105;
+    @apply bg-gradient-to-r from-primary to-secondary text-white font-bold py-2 px-4 rounded-lg hover:shadow-lg transition-all duration-300 hover:scale-105;
+  }
+
+  .neo-blur {
+    @apply backdrop-blur-2xl bg-black/40 border border-white/10;
+  }
+
+  .once-card {
+    @apply bg-card border border-white/5 rounded-lg shadow-md;
   }
 }

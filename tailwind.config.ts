@@ -64,12 +64,12 @@ export default {
 					ring: 'hsl(var(--sidebar-ring))'
 				},
 				gaming: {
-					'blue': '#2563EB',
-					'blue-dark': '#1E40AF',
-					'dark': '#0F172A',
-					'darker': '#060B17',
-					'gray': '#1E293B',
-					'gray-light': '#334155'
+					'blue': '#9b87f5', // Once UI primary purple
+					'blue-dark': '#7E69AB', // Darker purple
+					'dark': '#1A1F2C', // Dark background
+					'darker': '#12151F', // Even darker background
+					'gray': '#403E43', // Charcoal gray
+					'gray-light': '#8E9196' // Lighter gray
 				}
 			},
 			borderRadius: {
