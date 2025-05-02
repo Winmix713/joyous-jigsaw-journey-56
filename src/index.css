@@ -32,7 +32,7 @@
     --chart-5: 135 59% 49%;
   }
  
-  /* In Once UI 2.0, we always use dark mode, so keep consistent values */
+  /* In Once UI 2.0, we always use dark mode */
   .dark {
     --background: 220 14% 12%;
     --foreground: 0 0% 98%;
@@ -69,10 +69,17 @@
     @apply bg-background text-foreground;
   }
 
+  /* Once UI Glass Effect */
   .glass-effect {
     @apply backdrop-blur-md bg-white/5 border border-white/10 rounded-xl shadow-lg;
   }
 
+  /* Once UI Card Styles */
+  .once-card {
+    @apply bg-card border border-white/5 rounded-lg shadow-md;
+  }
+  
+  /* Premium Card with Gradient Background */
   .premier-card {
     @apply bg-gradient-to-br from-primary/20 to-secondary/10 backdrop-blur-sm border border-white/5 rounded-xl shadow-md;
   }
@@ -81,48 +88,52 @@
     @apply bg-background/90 text-foreground font-bold p-4 rounded-t-xl border-b border-white/5;
   }
 
+  /* Once UI Text Gradient */
   .premier-gradient-text {
     @apply bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent font-bold;
   }
 
+  /* Once UI Button */
   .premier-button {
     @apply bg-gradient-to-r from-primary to-secondary text-white font-bold py-2 px-4 rounded-lg hover:shadow-lg transition-all duration-300 hover:scale-105;
   }
 
+  /* Once UI Blur Effect */
   .neo-blur {
     @apply backdrop-blur-2xl bg-black/40 border border-white/10;
   }
-
-  .once-card {
-    @apply bg-card border border-white/5 rounded-lg shadow-md;
-  }
   
-  /* Add new utility classes for Once UI 2.0 */
+  /* Once UI Input */
   .once-input {
     @apply bg-muted border border-white/10 rounded-md px-3 py-2 text-sm focus:border-primary focus:ring-1 focus:ring-primary/30;
   }
   
+  /* Once UI Shadow */
   .once-shadow {
     @apply shadow-lg shadow-black/20;
   }
 
+  /* Once UI Transitions */
   .once-transition {
     @apply transition-all duration-300 ease-in-out;
   }
 
+  /* Once UI Hover Effect */
   .once-hover-effect {
     @apply hover:-translate-y-0.5 hover:shadow-lg hover:shadow-primary/10 transition-all duration-300;
   }
   
-  /* New styles for the updated header */
+  /* Once UI Header Pills */
   .winmix-header-pill {
     @apply bg-primary/10 border border-primary/20 rounded-md px-3 py-1 text-sm font-semibold text-primary;
   }
   
+  /* Once UI Header Button */
   .winmix-header-button {
     @apply bg-white/5 border border-white/10 rounded-full hover:bg-white/10 transition-colors;
   }
   
+  /* Once UI Navigation Item */
   .winmix-nav-item {
     @apply flex items-center px-3 py-2 text-sm font-medium rounded-md text-foreground hover:bg-white/5 transition-colors;
   }

@@ -62,7 +62,7 @@ export function NewHeader() {
             <Link 
               key={item.path}
               to={item.path}
-              className="flex items-center px-3 py-2 text-sm font-medium rounded-md text-foreground hover:bg-white/5 transition-colors"
+              className="winmix-nav-item"
             >
               {item.icon}
               {item.label}
@@ -73,17 +73,17 @@ export function NewHeader() {
         {/* User Controls */}
         <div className="flex items-center space-x-2">
           {/* Points */}
-          <div className="bg-primary/10 border border-primary/20 rounded-md px-3 py-1">
+          <div className="winmix-header-pill">
             <span className="text-sm font-semibold text-primary">1250 Points</span>
           </div>
           
           {/* Win Rate */}
-          <div className="bg-primary/10 border border-primary/20 rounded-md px-3 py-1">
+          <div className="winmix-header-pill">
             <span className="text-sm font-semibold text-primary">68% Win Rate</span>
           </div>
           
           {/* Theme Toggle */}
-          <Button variant="ghost" size="icon" className="text-foreground bg-white/5 border border-white/10 rounded-full">
+          <Button variant="ghost" size="icon" className="text-foreground winmix-header-button">
             <span className="h-[1.2rem] w-[1.2rem]">
               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <circle cx="12" cy="12" r="4"></circle>
@@ -100,7 +100,7 @@ export function NewHeader() {
           </Button>
           
           {/* Notifications */}
-          <Button variant="ghost" size="icon" className="text-foreground bg-white/5 border border-white/10 rounded-full relative">
+          <Button variant="ghost" size="icon" className="text-foreground winmix-header-button relative">
             <Bell className="h-5 w-5" />
             {userStats.notifications.some(n => !n.read) && (
               <span className="absolute top-1 right-1 h-2 w-2 rounded-full bg-primary" />
@@ -110,7 +110,7 @@ export function NewHeader() {
           {/* Profile */}
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button variant="ghost" className="bg-white/5 border border-white/10 rounded-full flex items-center gap-1 px-2">
+              <Button variant="ghost" className="winmix-header-button flex items-center gap-1 px-2">
                 <Avatar className="h-7 w-7 border border-primary/30">
                   <AvatarFallback className="text-xs bg-primary/20 text-primary">
                     {userStats.username.substring(0, 1).toUpperCase()}

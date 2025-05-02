@@ -12,24 +12,22 @@ interface MainLayoutProps {
 }
 
 export default function MainLayout({ children }: MainLayoutProps) {
-  const { isDarkMode } = useAppStore();
-  
   // Document title and theme setting
   useEffect(() => {
     // Set the page title
     document.title = "WinMix.hu - Premier Betting Platform";
     
-    // Toggle dark theme using DOM manipulation - force dark mode in Once UI 2.0
+    // Force dark mode for Once UI 2.0
     document.documentElement.classList.add('dark');
   }, []);
   
-  // Prepare background gradient styles for Once UI 2.0 Dark
+  // Once UI 2.0 background gradient styles
   const backgroundGradient = 
     "radial-gradient(circle at top right, rgba(155, 135, 245, 0.08), transparent 40%), radial-gradient(circle at bottom left, rgba(126, 105, 171, 0.08), transparent 40%)";
 
   return (
     <div className="min-h-screen flex flex-col bg-background dark">
-      {/* Decorative background */}
+      {/* Once UI decorative background */}
       <div 
         className="fixed inset-0 bg-background z-[-1]"
         style={{ backgroundImage: backgroundGradient }}
@@ -38,8 +36,8 @@ export default function MainLayout({ children }: MainLayoutProps) {
       {/* Header */}
       <NewHeader />
       
-      {/* Main content */}
-      <main className="flex-grow">
+      {/* Main content with Once UI padding */}
+      <main className="flex-grow container mx-auto px-4 py-6">
         {children}
       </main>
       
@@ -49,7 +47,7 @@ export default function MainLayout({ children }: MainLayoutProps) {
       {/* Bet Slip */}
       <BetSlip />
       
-      {/* Toast notifications */}
+      {/* Toast notifications with Once UI styling */}
       <Toaster />
     </div>
   );
