@@ -131,3 +131,64 @@ export interface CurrentBet {
   selectedParticipantId: string | null;
   amount: number;
 }
+
+// Soccer Championship Analysis Types
+export interface LeagueData {
+  id: string;
+  name: string;
+  season: string;
+  status: 'active' | 'completed' | 'upcoming';
+  teams: TeamData[];
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface TeamData {
+  id: string;
+  name: string;
+  shortName?: string;
+  logo?: string;
+  primaryColor?: string;
+  secondaryColor?: string;
+}
+
+export interface Match {
+  id: string;
+  leagueId: string;
+  homeTeamId: string;
+  awayTeamId: string;
+  homeScore: number | null;
+  awayScore: number | null;
+  date: string;
+  status: 'scheduled' | 'played' | 'canceled' | 'postponed';
+  round: number;
+  venue?: string;
+}
+
+export interface Standing {
+  teamId: string;
+  teamName: string;
+  position: number;
+  played: number;
+  won: number;
+  drawn: number;
+  lost: number;
+  goalsFor: number;
+  goalsAgainst: number;
+  goalDifference: number;
+  points: number;
+  form: string[];
+}
+
+export interface TeamForm {
+  teamId: string;
+  teamName: string;
+  lastMatches: Array<{
+    matchId: string;
+    opponent: string;
+    result: 'W' | 'D' | 'L';
+    homeScore: number;
+    awayScore: number;
+    wasHome: boolean;
+  }>;
+}

@@ -1,7 +1,9 @@
 
 import { create } from 'zustand';
-import { Tip, Notification, User, TipHistory, Tipster, Game, RecentWinner, CurrentBet } from './types';
+import { Tip, Notification, User, TipHistory, Tipster, Game, RecentWinner, CurrentBet, LeagueData, Match, TeamData } from './types';
 import { mockTips, mockNotifications, mockTipsters } from './mock-data';
+import { createNewLeague } from './league-calculator';
+import { generateId } from './utils';
 
 interface AppState {
   userStats: User & { notifications: Notification[] };
@@ -19,6 +21,11 @@ interface AppState {
   isDarkMode: boolean;
   isAuthenticated: boolean;
 
+  // Soccer Championship Analysis Data
+  leagues: LeagueData[];
+  matches: Match[];
+  currentLeagueId: string | null;
+
   // Actions
   markNotificationAsRead: (id: string) => void;
   setCurrentTip: (tip: Partial<AppState['currentTip']>) => void;
@@ -28,6 +35,17 @@ interface AppState {
   toggleDarkMode: () => void;
   login: () => void;
   logout: () => void;
+
+  // League Actions
+  createLeague: (name: string, season: string, teams: TeamData[]) => string;
+  updateLeague: (id: string, updates: Partial<LeagueData>) => void;
+  deleteLeague: (id: string) => void;
+  setCurrentLeague: (id: string | null) => void;
+  
+  // Match Actions
+  addMatches: (matches: Match[]) => void;
+  updateMatch: (id: string, updates: Partial<Match>) => void;
+  deleteMatch: (id: string) => void;
 }
 
 // Mock data for games and recent winners
@@ -85,6 +103,77 @@ const mockRecentWinners: RecentWinner[] = [
   }
 ];
 
+// Sample teams for initial leagues
+const mockTeams: TeamData[] = [
+  { id: "arsenal", name: "Arsenal" },
+  { id: "chelsea", name: "Chelsea" },
+  { id: "liverpool", name: "Liverpool" },
+  { id: "mancity", name: "Manchester City" },
+  { id: "manutd", name: "Manchester United" },
+  { id: "tottenham", name: "Tottenham" }
+];
+
+// Create a sample league
+const sampleLeague = createNewLeague("Premier League", "2023-2024", mockTeams);
+
+// Create some sample matches
+const sampleMatches: Match[] = [
+  {
+    id: generateId(),
+    leagueId: sampleLeague.id,
+    homeTeamId: "arsenal",
+    awayTeamId: "chelsea",
+    homeScore: 2,
+    awayScore: 1,
+    date: new Date(2023, 8, 15).toISOString(),
+    status: "played",
+    round: 1
+  },
+  {
+    id: generateId(),
+    leagueId: sampleLeague.id,
+    homeTeamId: "liverpool",
+    awayTeamId: "mancity",
+    homeScore: 0,
+    awayScore: 0,
+    date: new Date(2023, 8, 15).toISOString(),
+    status: "played",
+    round: 1
+  },
+  {
+    id: generateId(),
+    leagueId: sampleLeague.id,
+    homeTeamId: "manutd",
+    awayTeamId: "tottenham",
+    homeScore: null,
+    awayScore: null,
+    date: new Date(2023, 9, 1).toISOString(),
+    status: "scheduled",
+    round: 2
+  }
+];
+
+// Load leagues and matches from localStorage if available
+const loadLeagues = (): LeagueData[] => {
+  try {
+    const storedLeagues = localStorage.getItem('leagues');
+    return storedLeagues ? JSON.parse(storedLeagues) : [sampleLeague];
+  } catch (error) {
+    console.error('Failed to load leagues from localStorage:', error);
+    return [sampleLeague];
+  }
+};
+
+const loadMatches = (): Match[] => {
+  try {
+    const storedMatches = localStorage.getItem('matches');
+    return storedMatches ? JSON.parse(storedMatches) : sampleMatches;
+  } catch (error) {
+    console.error('Failed to load matches from localStorage:', error);
+    return sampleMatches;
+  }
+};
+
 export const useAppStore = create<AppState>((set, get) => ({
   userStats: {
     id: '1',
@@ -114,6 +203,11 @@ export const useAppStore = create<AppState>((set, get) => ({
   recentWinners: mockRecentWinners,
   isDarkMode: true,
   isAuthenticated: true,
+  
+  // Soccer Championship Analysis state
+  leagues: loadLeagues(),
+  matches: loadMatches(),
+  currentLeagueId: null,
 
   markNotificationAsRead: (id) =>
     set((state) => ({
@@ -219,4 +313,92 @@ export const useAppStore = create<AppState>((set, get) => ({
     set(() => ({
       isAuthenticated: false,
     })),
+
+  // League actions
+  createLeague: (name, season, teams) => {
+    const newLeague = createNewLeague(name, season, teams);
+    
+    set((state) => {
+      const updatedLeagues = [...state.leagues, newLeague];
+      // Save to localStorage
+      localStorage.setItem('leagues', JSON.stringify(updatedLeagues));
+      
+      return { 
+        leagues: updatedLeagues,
+        currentLeagueId: newLeague.id
+      };
+    });
+    
+    return newLeague.id;
+  },
+  
+  updateLeague: (id, updates) => {
+    set((state) => {
+      const updatedLeagues = state.leagues.map(league => 
+        league.id === id ? { ...league, ...updates, updatedAt: new Date().toISOString() } : league
+      );
+      
+      // Save to localStorage
+      localStorage.setItem('leagues', JSON.stringify(updatedLeagues));
+      
+      return { leagues: updatedLeagues };
+    });
+  },
+  
+  deleteLeague: (id) => {
+    set((state) => {
+      const updatedLeagues = state.leagues.filter(league => league.id !== id);
+      const updatedMatches = state.matches.filter(match => match.leagueId !== id);
+      
+      // Save to localStorage
+      localStorage.setItem('leagues', JSON.stringify(updatedLeagues));
+      localStorage.setItem('matches', JSON.stringify(updatedMatches));
+      
+      return { 
+        leagues: updatedLeagues,
+        matches: updatedMatches,
+        currentLeagueId: state.currentLeagueId === id ? null : state.currentLeagueId
+      };
+    });
+  },
+  
+  setCurrentLeague: (id) => {
+    set({ currentLeagueId: id });
+  },
+  
+  // Match actions
+  addMatches: (matches) => {
+    set((state) => {
+      const updatedMatches = [...state.matches, ...matches];
+      
+      // Save to localStorage
+      localStorage.setItem('matches', JSON.stringify(updatedMatches));
+      
+      return { matches: updatedMatches };
+    });
+  },
+  
+  updateMatch: (id, updates) => {
+    set((state) => {
+      const updatedMatches = state.matches.map(match => 
+        match.id === id ? { ...match, ...updates } : match
+      );
+      
+      // Save to localStorage
+      localStorage.setItem('matches', JSON.stringify(updatedMatches));
+      
+      return { matches: updatedMatches };
+    });
+  },
+  
+  deleteMatch: (id) => {
+    set((state) => {
+      const updatedMatches = state.matches.filter(match => match.id !== id);
+      
+      // Save to localStorage
+      localStorage.setItem('matches', JSON.stringify(updatedMatches));
+      
+      return { matches: updatedMatches };
+    });
+  }
 }));
