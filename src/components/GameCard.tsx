@@ -37,10 +37,11 @@ export default function GameCard({ game }: GameCardProps) {
     setBetAmount(clampedAmount);
 
     if (isSelected) {
-      setCurrentBet((prevBet) => ({
-        ...prevBet,
-        amount: clampedAmount,
-      }));
+      setCurrentBet({
+        gameId: currentBet.gameId,
+        selectedParticipantId: currentBet.selectedParticipantId,
+        amount: clampedAmount
+      });
     }
   };
 
