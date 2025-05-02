@@ -1,5 +1,6 @@
+
 import { useMemo, useState } from "react";
-import { Flame, Clock, Trophy, Gamepad2, TrendingUp, Info } from "lucide-react";
+import { Flame, Clock, Trophy, Gamepad2, TrendingUp, Info, Sparkles } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useAppStore } from "@/lib/store";
 import GameCard from "./GameCard";
@@ -8,6 +9,7 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/comp
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
+import LeagueStandings from "./leagues/LeagueStandings";
 
 // Category configurations for better maintainability
 const CATEGORIES = [
@@ -16,6 +18,7 @@ const CATEGORIES = [
   { id: "upcoming", label: "Upcoming", icon: Clock },
   { id: "sport", label: "Sports", icon: Trophy },
   { id: "esport", label: "eSports", icon: Gamepad2 },
+  { id: "leagues", label: "Leagues", icon: Sparkles },
 ];
 
 // Helper component for empty states
@@ -48,15 +51,14 @@ const GameGrid = ({ games }) => {
 
 // Welcome bonus card as a separate component
 const WelcomeBonus = () => (
-  <Card className="relative overflow-hidden border border-white/10">
-    <div className="absolute inset-0 bg-gradient-to-br from-blue-600/20 to-indigo-900/20" />
+  <Card className="relative overflow-hidden border border-white/10 premier-card">
     <div className="relative z-10 p-6">
-      <h3 className="text-lg font-bold mb-2">Welcome Bonus</h3>
+      <h3 className="text-lg font-bold mb-2 premier-gradient-text">Welcome Bonus</h3>
       <p className="text-sm text-muted-foreground mb-4">
         New to WinMix? Get 500 bonus points on your first deposit!
       </p>
       <Button 
-        className="bg-blue-600 hover:bg-blue-700 transition-colors"
+        className="bg-gradient-to-r from-primary to-secondary hover:from-primary/90 hover:to-secondary/90 transition-colors"
         size="sm"
       >
         Claim Bonus
@@ -79,6 +81,7 @@ export default function MainDashboard() {
       : games.filter((game) => {
           if (selectedCategory === "live") return game.status === "live";
           if (selectedCategory === "upcoming") return game.status === "upcoming";
+          if (selectedCategory === "leagues") return games; // For leagues tab, we'll show the standings instead
           return game.category === selectedCategory;
         });
 
@@ -96,12 +99,12 @@ export default function MainDashboard() {
           <div className="lg:col-span-2 space-y-8">
             <section>
               <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6 gap-2">
-                <h2 className="text-2xl font-bold tracking-tight">Games</h2>
+                <h2 className="text-2xl font-bold tracking-tight premier-gradient-text">Games</h2>
                 <TooltipProvider>
                   <Tooltip>
                     <TooltipTrigger asChild>
                       <div className="flex items-center gap-2 text-sm">
-                        <Badge variant="outline" className="bg-blue-600/20 text-blue-400">
+                        <Badge variant="outline" className="bg-premier-purple/20 text-premier-purple">
                           {liveGamesCount} Live
                         </Badge>
                         <Badge variant="outline" className="bg-muted/30">
@@ -117,13 +120,13 @@ export default function MainDashboard() {
               </div>
 
               <Tabs defaultValue="all" className="mb-6">
-                <TabsList className="grid grid-cols-3 sm:grid-cols-5 h-auto p-1 bg-muted/30 backdrop-blur-md">
+                <TabsList className="grid grid-cols-3 sm:grid-cols-6 h-auto p-1 bg-muted/30 backdrop-blur-md rounded-lg">
                   {CATEGORIES.map(({ id, label, icon: Icon }) => (
                     <TabsTrigger
                       key={id}
                       value={id}
                       onClick={() => setSelectedCategory(id)}
-                      className="text-xs py-2 data-[state=active]:bg-blue-600"
+                      className="text-xs py-2 data-[state=active]:bg-gradient-to-r data-[state=active]:from-primary data-[state=active]:to-secondary data-[state=active]:text-white"
                     >
                       {Icon && <Icon className="h-3 w-3 mr-1" />}
                       {label}
@@ -133,7 +136,10 @@ export default function MainDashboard() {
 
                 {CATEGORIES.map(({ id }) => (
                   <TabsContent key={id} value={id} className="mt-3">
-                    <GameGrid games={filteredGames} />
+                    {id === "leagues" ? 
+                      <LeagueStandings /> : 
+                      <GameGrid games={filteredGames} />
+                    }
                   </TabsContent>
                 ))}
               </Tabs>
@@ -141,18 +147,18 @@ export default function MainDashboard() {
           </div>
 
           <div className="space-y-8">
-            <section className="bg-muted/10 p-4 rounded-lg border border-white/5">
+            <section className="glass-effect p-4 rounded-lg">
               <div className="flex items-center justify-between mb-4">
-                <h2 className="text-xl font-bold tracking-tight">Top Winners</h2>
-                <TrendingUp className="h-4 w-4 text-blue-400" />
+                <h2 className="text-xl font-bold tracking-tight premier-gradient-text">Top Winners</h2>
+                <TrendingUp className="h-4 w-4 text-premier-blue" />
               </div>
               <RecentWinners />
             </section>
 
             <WelcomeBonus />
 
-            <section className="bg-muted/10 p-4 rounded-lg border border-white/5">
-              <h2 className="text-xl font-bold tracking-tight mb-4">Active Tournaments</h2>
+            <section className="glass-effect p-4 rounded-lg">
+              <h2 className="text-xl font-bold tracking-tight premier-gradient-text mb-4">Active Tournaments</h2>
               <div className="space-y-3">
                 {[1, 2].map((i) => (
                   <div 
@@ -163,7 +169,7 @@ export default function MainDashboard() {
                       <h3 className="font-medium">Weekly Championship {i}</h3>
                       <p className="text-xs text-muted-foreground">Prize pool: $10,000</p>
                     </div>
-                    <Badge>Ongoing</Badge>
+                    <Badge className="bg-premier-purple hover:bg-premier-purple/80">Ongoing</Badge>
                   </div>
                 ))}
               </div>
