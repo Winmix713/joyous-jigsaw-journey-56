@@ -1,3 +1,4 @@
+
 export interface User {
   id: string;
   username: string;
@@ -92,4 +93,41 @@ export interface Tipster {
   timestamp: string; // ISO string
   successRate: number;
   expertise: string[];
+}
+
+// Adding missing Game type
+export interface Game {
+  id: string;
+  title: string;
+  description: string;
+  image?: string;
+  status: 'upcoming' | 'live' | 'completed';
+  startTime: string;
+  endTime?: string;
+  category: string;
+  participants: {
+    id: string;
+    name: string;
+    isPopular?: boolean;
+  }[];
+  odds: Record<string, number>;
+  minBet: number;
+  maxBet: number;
+}
+
+// Adding types for recent winners
+export interface RecentWinner {
+  id: string;
+  username: string;
+  timestamp: string;
+  gameTitle: string;
+  amount: number;
+  winningAmount: number;
+}
+
+// Type for the current bet
+export interface CurrentBet {
+  gameId: string | null;
+  selectedParticipantId: string | null;
+  amount: number;
 }

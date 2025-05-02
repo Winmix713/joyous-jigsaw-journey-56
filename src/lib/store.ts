@@ -1,10 +1,13 @@
+
 import { create } from 'zustand';
-import { Tip, Notification, User, TipHistory, Tipster } from './types';
+import { Tip, Notification, User, TipHistory, Tipster, Game, RecentWinner, CurrentBet } from './types';
 import { mockTips, mockNotifications, mockTipsters } from './mock-data';
 
 interface AppState {
   userStats: User & { notifications: Notification[] };
   tips: Tip[];
+  games: Game[];
+  currentBet: CurrentBet;
   currentTip: {
     tipId: string | null;
     stake: number;
@@ -12,17 +15,75 @@ interface AppState {
   };
   tipHistory: TipHistory[];
   topTipsters: Tipster[];
+  recentWinners: RecentWinner[];
   isDarkMode: boolean;
   isAuthenticated: boolean;
 
   // Actions
   markNotificationAsRead: (id: string) => void;
   setCurrentTip: (tip: Partial<AppState['currentTip']>) => void;
+  setCurrentBet: (bet: Partial<CurrentBet>) => void;
   followTip: () => void;
+  placeBet: () => void;
   toggleDarkMode: () => void;
   login: () => void;
   logout: () => void;
 }
+
+// Mock data for games and recent winners
+const mockGames: Game[] = [
+  {
+    id: "game1",
+    title: "Premier League: London Derby",
+    description: "Arsenal vs Chelsea",
+    image: "/placeholder.jpg",
+    status: "live",
+    startTime: new Date().toISOString(),
+    category: "football",
+    participants: [
+      { id: "arsenal", name: "Arsenal" },
+      { id: "chelsea", name: "Chelsea", isPopular: true }
+    ],
+    odds: { arsenal: 2.1, chelsea: 3.5 },
+    minBet: 10,
+    maxBet: 1000
+  },
+  {
+    id: "game2",
+    title: "La Liga Showdown",
+    description: "Barcelona vs Real Madrid",
+    image: "/placeholder.jpg",
+    status: "upcoming",
+    startTime: new Date(Date.now() + 86400000).toISOString(),
+    category: "football",
+    participants: [
+      { id: "barcelona", name: "Barcelona", isPopular: true },
+      { id: "realmadrid", name: "Real Madrid" }
+    ],
+    odds: { barcelona: 1.9, realmadrid: 2.8 },
+    minBet: 10,
+    maxBet: 2000
+  }
+];
+
+const mockRecentWinners: RecentWinner[] = [
+  {
+    id: "winner1",
+    username: "SportsBetter",
+    timestamp: new Date(Date.now() - 2400000).toISOString(),
+    gameTitle: "Premier League: London Derby",
+    amount: 100,
+    winningAmount: 350
+  },
+  {
+    id: "winner2",
+    username: "LuckyGambler",
+    timestamp: new Date(Date.now() - 5400000).toISOString(),
+    gameTitle: "NBA Championship",
+    amount: 200,
+    winningAmount: 480
+  }
+];
 
 export const useAppStore = create<AppState>((set, get) => ({
   userStats: {
@@ -37,6 +98,12 @@ export const useAppStore = create<AppState>((set, get) => ({
     notifications: mockNotifications,
   },
   tips: mockTips,
+  games: mockGames,
+  currentBet: {
+    gameId: null,
+    selectedParticipantId: null,
+    amount: 100
+  },
   currentTip: {
     tipId: null,
     stake: 100,
@@ -44,6 +111,7 @@ export const useAppStore = create<AppState>((set, get) => ({
   },
   tipHistory: [],
   topTipsters: mockTipsters,
+  recentWinners: mockRecentWinners,
   isDarkMode: true,
   isAuthenticated: true,
 
@@ -60,6 +128,11 @@ export const useAppStore = create<AppState>((set, get) => ({
   setCurrentTip: (tip) =>
     set((state) => ({
       currentTip: { ...state.currentTip, ...tip },
+    })),
+    
+  setCurrentBet: (bet) =>
+    set((state) => ({
+      currentBet: { ...state.currentBet, ...bet },
     })),
 
   followTip: () => {
@@ -100,6 +173,35 @@ export const useAppStore = create<AppState>((set, get) => ({
         stake: 100,
         selectedPrediction: null,
       },
+    });
+  },
+  
+  placeBet: () => {
+    const { currentBet, userStats, games } = get();
+    
+    if (!currentBet.gameId || !currentBet.selectedParticipantId || currentBet.amount <= 0) {
+      console.warn('Invalid bet placement attempt');
+      return;
+    }
+    
+    const game = games.find(g => g.id === currentBet.gameId);
+    if (!game) {
+      console.warn('Game not found');
+      return;
+    }
+    
+    // Process the bet - in a real app this would be an API call
+    set({
+      userStats: {
+        ...userStats,
+        points: userStats.points - currentBet.amount
+      },
+      // Reset current bet
+      currentBet: {
+        gameId: null,
+        selectedParticipantId: null,
+        amount: 100
+      }
     });
   },
 
