@@ -1,7 +1,7 @@
 
 import { useEffect } from 'react';
 import { useAppStore } from '@/lib/store';
-import Header from '@/components/common/Header';
+import NewHeader from '@/components/common/Header/NewHeader';
 import BetSlip from '@/components/betting/BetSlip';
 import FooterSection from '@/components/FooterSection';
 import { Toaster } from '@/components/ui/toaster';
@@ -36,7 +36,7 @@ export default function MainLayout({ children }: MainLayoutProps) {
       />
       
       {/* Header */}
-      <Header />
+      <NewHeader />
       
       {/* Main content */}
       <main className="flex-grow">

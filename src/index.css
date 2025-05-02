@@ -113,4 +113,17 @@
   .once-hover-effect {
     @apply hover:-translate-y-0.5 hover:shadow-lg hover:shadow-primary/10 transition-all duration-300;
   }
+  
+  /* New styles for the updated header */
+  .winmix-header-pill {
+    @apply bg-primary/10 border border-primary/20 rounded-md px-3 py-1 text-sm font-semibold text-primary;
+  }
+  
+  .winmix-header-button {
+    @apply bg-white/5 border border-white/10 rounded-full hover:bg-white/10 transition-colors;
+  }
+  
+  .winmix-nav-item {
+    @apply flex items-center px-3 py-2 text-sm font-medium rounded-md text-foreground hover:bg-white/5 transition-colors;
+  }
 }
