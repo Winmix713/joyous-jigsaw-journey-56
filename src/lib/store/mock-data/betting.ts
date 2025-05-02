@@ -1,5 +1,5 @@
-
-import { Game, RecentWinner, Tip, Tipster } from '@/lib/types';
+import { Game, Tip, Tipster, RecentWinner } from '@/lib/types';
+import { generateId } from '@/lib/utils';
 
 // Mock tips data
 export const mockTips: Tip[] = [
@@ -127,55 +127,127 @@ export const mockTipsters: Tipster[] = [
 // Mock games data
 export const mockGames: Game[] = [
   {
-    id: "game1",
-    title: "Premier League: London Derby",
-    description: "Arsenal vs Chelsea",
-    image: "/placeholder.jpg",
-    status: "live",
-    startTime: new Date().toISOString(),
-    category: "football",
+    id: '1',
+    title: 'Manchester United vs Liverpool',
+    description: 'Premier League match of the week',
+    image: 'https://images.unsplash.com/photo-1575361204480-aadea25e6e68?w=800&auto=format&fit=crop',
+    status: 'upcoming',
+    startTime: new Date(Date.now() + 1000 * 60 * 60 * 24).toISOString(),
+    category: 'sports',
     participants: [
-      { id: "arsenal", name: "Arsenal" },
-      { id: "chelsea", name: "Chelsea", isPopular: true }
+      { id: 'mu', name: 'Manchester United' },
+      { id: 'liv', name: 'Liverpool' }
     ],
-    odds: { arsenal: 2.1, chelsea: 3.5 },
-    minBet: 10,
-    maxBet: 1000
+    odds: { 'mu': 2.10, 'liv': 1.75 },
+    minBet: 50,
+    maxBet: 5000
   },
   {
-    id: "game2",
-    title: "La Liga Showdown",
-    description: "Barcelona vs Real Madrid",
-    image: "/placeholder.jpg",
-    status: "upcoming",
-    startTime: new Date(Date.now() + 86400000).toISOString(),
-    category: "football",
+    id: '2',
+    title: 'CS:GO - Navi vs Faze',
+    description: 'ESL Pro League Season 16',
+    image: 'https://images.unsplash.com/photo-1542751371-adc38448a05e?w=800&auto=format&fit=crop',
+    status: 'live',
+    startTime: new Date(Date.now() - 1000 * 60 * 30).toISOString(),
+    category: 'esports',
     participants: [
-      { id: "barcelona", name: "Barcelona", isPopular: true },
-      { id: "realmadrid", name: "Real Madrid" }
+      { id: 'navi', name: 'Natus Vincere' },
+      { id: 'faze', name: 'Faze Clan' }
     ],
-    odds: { barcelona: 1.9, realmadrid: 2.8 },
-    minBet: 10,
-    maxBet: 2000
+    odds: { 'navi': 1.90, 'faze': 1.85 },
+    minBet: 100,
+    maxBet: 10000
+  },
+  {
+    id: '3',
+    title: 'NBA Finals - Lakers vs Celtics',
+    description: 'Game 7 of the NBA Finals',
+    image: 'https://images.unsplash.com/photo-1504450758481-7338eba7524a?w=800&auto=format&fit=crop',
+    status: 'upcoming',
+    startTime: new Date(Date.now() + 1000 * 60 * 60 * 48).toISOString(),
+    category: 'sports',
+    participants: [
+      { id: 'lakers', name: 'LA Lakers' },
+      { id: 'celtics', name: 'Boston Celtics' }
+    ],
+    odds: { 'lakers': 1.95, 'celtics': 1.85 },
+    minBet: 100,
+    maxBet: 10000
+  },
+  {
+    id: '4',
+    title: 'League of Legends - T1 vs JDG',
+    description: 'World Championship Finals',
+    image: 'https://images.unsplash.com/photo-1626240130051-68871c71e991?w=800&auto=format&fit=crop',
+    status: 'upcoming',
+    startTime: new Date(Date.now() + 1000 * 60 * 60 * 72).toISOString(),
+    category: 'esports',
+    participants: [
+      { id: 't1', name: 'T1' },
+      { id: 'jdg', name: 'JDG' }
+    ],
+    odds: { 't1': 1.65, 'jdg': 2.15 },
+    minBet: 50,
+    maxBet: 5000
+  },
+  {
+    id: '5',
+    title: 'Tennis - Djokovic vs Alcaraz',
+    description: 'Wimbledon Final',
+    image: 'https://images.unsplash.com/photo-1560012057-4372e14c5085?w=800&auto=format&fit=crop',
+    status: 'live',
+    startTime: new Date(Date.now() - 1000 * 60 * 45).toISOString(),
+    category: 'sports',
+    participants: [
+      { id: 'djok', name: 'Novak Djokovic' },
+      { id: 'alc', name: 'Carlos Alcaraz' }
+    ],
+    odds: { 'djok': 2.05, 'alc': 1.75 },
+    minBet: 100,
+    maxBet: 8000
   }
 ];
 
 // Mock recent winners data
 export const mockRecentWinners: RecentWinner[] = [
   {
-    id: "winner1",
-    username: "SportsBetter",
-    timestamp: new Date(Date.now() - 2400000).toISOString(),
-    gameTitle: "Premier League: London Derby",
-    amount: 100,
-    winningAmount: 350
+    id: generateId(),
+    username: 'SportsMaster',
+    timestamp: new Date(Date.now() - 1000 * 60 * 5).toISOString(),
+    gameTitle: 'Real Madrid vs Barcelona',
+    amount: 200,
+    winningAmount: 460
   },
   {
-    id: "winner2",
-    username: "LuckyGambler",
-    timestamp: new Date(Date.now() - 5400000).toISOString(),
-    gameTitle: "NBA Championship",
-    amount: 200,
-    winningAmount: 480
+    id: generateId(),
+    username: 'LuckyGamer22',
+    timestamp: new Date(Date.now() - 1000 * 60 * 15).toISOString(),
+    gameTitle: 'CS:GO - Navi vs Vitality',
+    amount: 500,
+    winningAmount: 1250
+  },
+  {
+    id: generateId(),
+    username: 'BettingPro',
+    timestamp: new Date(Date.now() - 1000 * 60 * 30).toISOString(),
+    gameTitle: 'NBA - Lakers vs Warriors',
+    amount: 300,
+    winningAmount: 540
+  },
+  {
+    id: generateId(),
+    username: 'FootballFan',
+    timestamp: new Date(Date.now() - 1000 * 60 * 45).toISOString(),
+    gameTitle: 'Liverpool vs Manchester City',
+    amount: 100,
+    winningAmount: 180
+  },
+  {
+    id: generateId(),
+    username: 'ESportsKing',
+    timestamp: new Date(Date.now() - 1000 * 60 * 60).toISOString(),
+    gameTitle: 'League of Legends - G2 vs Fnatic',
+    amount: 250,
+    winningAmount: 525
   }
 ];
