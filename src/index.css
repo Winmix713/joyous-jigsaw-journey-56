@@ -1,63 +1,51 @@
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
  
 @layer base {
   :root {
-    --background: 222 16% 15%;
-    --foreground: 0 0% 98%;
-    --card: 220 14% 12%;
-    --card-foreground: 0 0% 98%;
-    --popover: 220 14% 12%;
-    --popover-foreground: 0 0% 98%;
-    --primary: 260 91% 75%; /* Once UI primary purple */
-    --primary-foreground: 0 0% 98%;
-    --secondary: 259 31% 49%; /* Darker purple */
-    --secondary-foreground: 0 0% 98%;
-    --muted: 220 14% 22%;
-    --muted-foreground: 220 14% 70%;
-    --accent: 255 29% 33%;
-    --accent-foreground: 0 0% 98%;
-    --destructive: 0 84% 60%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 220 14% 22%;
-    --input: 220 14% 22%;
-    --ring: 260 91% 75%;
-    --radius: 0.75rem;
-    --chart-1: 260 91% 75%;
-    --chart-2: 259 31% 49%;
-    --chart-3: 255 29% 33%;
-    --chart-4: 332 80% 60%;
-    --chart-5: 135 59% 49%;
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+    --primary: 222.2 47.4% 11.2%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 222.2 84% 4.9%;
+    --radius: 0.5rem;
   }
  
-  /* In Once UI 2.0, we always use dark mode */
   .dark {
-    --background: 220 14% 12%;
-    --foreground: 0 0% 98%;
-    --card: 220 16% 15%;
-    --card-foreground: 0 0% 98%;
-    --popover: 220 14% 12%;
-    --popover-foreground: 0 0% 98%;
-    --primary: 260 91% 75%; /* Once UI primary purple */
-    --primary-foreground: 220 14% 12%;
-    --secondary: 259 31% 49%; /* Darker purple */
-    --secondary-foreground: 0 0% 98%;
-    --muted: 220 14% 22%;
-    --muted-foreground: 220 14% 70%;
-    --accent: 255 29% 33%;
-    --accent-foreground: 0 0% 98%;
-    --destructive: 0 84% 60%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 220 14% 22%;
-    --input: 220 14% 22%;
-    --ring: 260 91% 75%;
-    --chart-1: 260 91% 75%;
-    --chart-2: 259 31% 49%;
-    --chart-3: 255 29% 33%;
-    --chart-4: 332 80% 60%;
-    --chart-5: 135 59% 49%;
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 210 40% 98%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 212.7 26.8% 83.9%;
   }
 }
  
@@ -67,74 +55,5 @@
   }
   body {
     @apply bg-background text-foreground;
-  }
-
-  /* Once UI Glass Effect */
-  .glass-effect {
-    @apply backdrop-blur-md bg-white/5 border border-white/10 rounded-xl shadow-lg;
-  }
-
-  /* Once UI Card Styles */
-  .once-card {
-    @apply bg-card border border-white/5 rounded-lg shadow-md;
-  }
-  
-  /* Premium Card with Gradient Background */
-  .premier-card {
-    @apply bg-gradient-to-br from-primary/20 to-secondary/10 backdrop-blur-sm border border-white/5 rounded-xl shadow-md;
-  }
-
-  .premier-card-header {
-    @apply bg-background/90 text-foreground font-bold p-4 rounded-t-xl border-b border-white/5;
-  }
-
-  /* Once UI Text Gradient */
-  .premier-gradient-text {
-    @apply bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent font-bold;
-  }
-
-  /* Once UI Button */
-  .premier-button {
-    @apply bg-gradient-to-r from-primary to-secondary text-white font-bold py-2 px-4 rounded-lg hover:shadow-lg transition-all duration-300 hover:scale-105;
-  }
-
-  /* Once UI Blur Effect */
-  .neo-blur {
-    @apply backdrop-blur-2xl bg-black/40 border border-white/10;
-  }
-  
-  /* Once UI Input */
-  .once-input {
-    @apply bg-muted border border-white/10 rounded-md px-3 py-2 text-sm focus:border-primary focus:ring-1 focus:ring-primary/30;
-  }
-  
-  /* Once UI Shadow */
-  .once-shadow {
-    @apply shadow-lg shadow-black/20;
-  }
-
-  /* Once UI Transitions */
-  .once-transition {
-    @apply transition-all duration-300 ease-in-out;
-  }
-
-  /* Once UI Hover Effect */
-  .once-hover-effect {
-    @apply hover:-translate-y-0.5 hover:shadow-lg hover:shadow-primary/10 transition-all duration-300;
-  }
-  
-  /* Once UI Header Pills */
-  .winmix-header-pill {
-    @apply bg-primary/10 border border-primary/20 rounded-md px-3 py-1 text-sm font-semibold text-primary;
-  }
-  
-  /* Once UI Header Button */
-  .winmix-header-button {
-    @apply bg-white/5 border border-white/10 rounded-full hover:bg-white/10 transition-colors;
-  }
-  
-  /* Once UI Navigation Item */
-  .winmix-nav-item {
-    @apply flex items-center px-3 py-2 text-sm font-medium rounded-md text-foreground hover:bg-white/5 transition-colors;
   }
 }
